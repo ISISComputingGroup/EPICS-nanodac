@@ -1,0 +1,264 @@
+#################################################################
+#
+# Template to write a set of PID parameters and a high and low
+# output power limit when a process variable enters the specified window. 
+# This is specific to the NanoDAC application.
+#
+# Matt Pearson, May 16
+#
+# Macros:
+# S - base PV name
+# ND - name for this nanodac device
+# W - window number 
+# PV - the process variable to read
+# LOW - lower limit of the window (default 0)
+# HIGH - upper limit of the window (default 0)
+# P - the P value to use (default 0)
+# I - the I value to use (default 0)
+# D - the D value to use (default 0)
+# PL - the power low limit (default 0)
+# PH - the power high limit (default 0)
+# P_LINK - the PV link to write P to
+# I_LINK - the PV link to write I to
+# D_LINK - the PV link to write D to
+# PL_LINK - the PV link to write PL to
+# PH_LINK - the PV link to write PH to
+# UNITS - the units of the process variable
+#
+#################################################################
+
+# ///
+# /// Disable this template
+# ///
+record(bo, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable") {
+  field(DESC, "Disable this PID window")
+  field(PINI, "YES")
+  field(VAL, "1")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Enabled")
+  field(ONAM, "Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MAJOR")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// Record to hold the current PV value
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):Value") {
+  field(DESC, "Current PV Value")
+  field(INP, "$(PV) CP MS")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcInWindow.PROC")
+  field(EGU, "$(UNITS)")
+  field(PREC, "$(PREC=2)")
+}
+
+# ///
+# /// Calculate if $(PV) is in the window.
+# ///
+record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcInWindow") {
+  field(DESC, "Calc PV in window")
+  field(PINI, "YES")
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Set$(W):Low")
+  field(INPB, "$(S)$(ND)Loop$(L):PID:Set$(W):High")
+  field(INPC, "$(S)$(ND)Loop$(L):PID:Set$(W):Value MS")
+  field(CALC, "((C>=A)&&(C<B))")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:Set$(W):InWindow.VAL PP MS")
+  field(DOPT, "Use CALC")
+  field(PREC, "$(PREC=2)")
+  field(SCAN, "1 second")
+}
+
+# ///
+# /// The low boundary for the PV that is used by CalcInWindow
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):Low") {
+  field(DESC, "Low PV")
+  field(VAL, "$(LOW=0)")
+  field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The high boundary for the PV that is used by CalcInWindow
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):High") {
+  field(DESC, "High PV")
+  field(VAL, "$(HIGH=0)")
+  field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// Flag to indicate if the $(PV) is in the window
+# ///
+record(bo, "$(S)$(ND)Loop$(L):PID:Set$(W):InWindow") {
+  field(DESC, "PV in window")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Not In Window")
+  field(ONAM, "In Window")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcPIDWrite.PROC")
+}
+
+# ///
+# /// If the in-window flag does a 0->1 transition, trigger the PID write
+# ///
+record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcPIDWrite") {
+  field(DESC, "Calc PID Write")
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Set$(W):InWindow.VAL MS")
+  field(CALC, "A")
+  field(OOPT, "Transition To Non-zero")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:Set$(W):PIDWrite.PROC")
+  field(DOPT, "Use CALC")
+  field(SDIS, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable")
+}
+
+# ///
+# /// If we enable this template, and the in-window flag is 1, trigger the write.
+# /// This record is processed when we enable or disable the template.
+# ///
+record(calcout, "$(S)$(ND)Loop$(L):PID:Set$(W):CalcWriteEnable") {
+  field(DESC, "Calc Write Enable")
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Set$(W):InWindow.VAL MS")
+  field(INPB, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable.VAL MS")
+  field(CALC, "A&&!B")
+  field(OOPT, "When Non-zero")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:Set$(W):PIDWrite.PROC")
+  field(DOPT, "Use CALC")
+}
+
+# ///
+# /// Sequence record to trigger a PID write. 
+# ///
+record(seq, "$(S)$(ND)Loop$(L):PID:Set$(W):PIDWrite") {
+  field(DESC, "Write PID Values")
+  field(DOL1, "$(S)$(ND)Loop$(L):PID:Set$(W):PSet")
+  field(LNK1, "$(P_LINK) PP")
+  field(DLY1, "0.1")
+  field(DOL2, "$(S)$(ND)Loop$(L):PID:Set$(W):ISet")
+  field(LNK2, "$(I_LINK) PP")
+  field(DLY2, "0.1")
+  field(DOL3, "$(S)$(ND)Loop$(L):PID:Set$(W):DSet")
+  field(LNK3, "$(D_LINK) PP")
+  field(DLY3, "0.1")
+  field(DOL4, "$(S)$(ND)Loop$(L):PID:Set$(W):PLSet")
+  field(LNK4, "$(PL_LINK) PP")
+  field(DLY4, "0.1")
+  field(DOL5, "$(S)$(ND)Loop$(L):PID:Set$(W):PHSet")
+  field(LNK5, "$(PH_LINK) PP")
+  field(DLY5, "0.1")
+  field(SDIS, "$(S)$(ND)Loop$(L):PID:Set$(W):Disable")
+  field(PREC, "2")
+}
+
+# ///
+# /// The P that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PSet") {
+  field(DESC, "P Set")
+  field(VAL, "$(P=0)")
+  field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The I that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):ISet") {
+  field(DESC, "I Set")
+  field(VAL, "$(I=0)")
+  field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The D that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):DSet") {
+  field(DESC, "D Set")
+  field(VAL, "$(D=0)")
+  field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The PL that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PLSet") {
+  field(DESC, "PL Set")
+  field(VAL, "$(PL=0)")
+  field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// The PH that will be written by the seq record PIDWrite
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PHSet") {
+  field(DESC, "PH Set")
+  field(VAL, "$(PH=0)")
+  field(PREC, "$(PREC=2)")
+  field(PINI, "YES")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// Read back the P (for feedback for user)
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):P") {
+  field(DESC, "P Readback")
+  field(INP, "$(P_LINK) CP MS")
+  field(PREC, "$(PREC=2)")
+}
+
+# ///
+# /// Read back the I (for feedback for user)
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):I") {
+  field(DESC, "I Readback")
+  field(INP, "$(I_LINK) CP MS")
+  field(PREC, "$(PREC=2)")
+}
+
+# ///
+# /// Read back the D (for feedback for user)
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):D") {
+  field(DESC, "D Readback")
+  field(INP, "$(D_LINK) CP MS")
+  field(PREC, "$(PREC=2)")
+}
+
+# ///
+# /// Read back the output power low limit (for feedback for user)
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PL") {
+  field(DESC, "Power Low Limit RBV")
+  field(INP, "$(PL_LINK) CP MS")
+  field(PREC, "$(PREC=2)")
+}
+
+# ///
+# /// Read back the output power high limit (for feedback for user)
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Set$(W):PH") {
+  field(DESC, "Power High Limit RBV")
+  field(INP, "$(PH_LINK) CP MS")
+  field(PREC, "$(PREC=2)")
+}
+
+
+
+
+
+

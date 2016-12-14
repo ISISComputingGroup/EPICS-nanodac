@@ -1,0 +1,674 @@
+
+#############################################################
+#
+# Database template to read and write loop PID variables 
+# for the eurotherm nanodac. The PID set parameters
+# are dealt with in a seperate template, instantiated in
+# this one.
+# 
+# S - base PV name
+# ND - name for this nanodac
+# L - loop number
+# PORT - asyn port name for loop PID data
+#
+# Note: By convention the port name for the writeable parameters
+# is the same as the read parameters, but with a 'w' on the end.
+# 
+############################################################
+
+############################################################
+# Read records
+############################################################
+
+# /// 
+# /// Read the PID type  
+# ///
+record(mbbi, "$(S)$(ND)Loop$(L):PID:Type")
+{
+  field(DESC, "Loop$(L) PID Type")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),0,1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(ZRST, "Off")
+  field(ONST, "Set")
+  field(TWST, "Setpoint")
+  field(THST, "PV")
+  field(FRST, "Error")
+  field(FVST, "Output")
+  field(SXST, "Remote")
+}
+
+# /// 
+# /// Read the number of PID sets in use 
+# ///
+record(mbbi, "$(S)$(ND)Loop$(L):PID:NumSets")
+{
+  field(DESC, "Loop$(L) PID Num Sets")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),1,1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "1 Set")
+  field(ONST, "2 Sets")
+  field(TWST, "3 Sets")
+}
+
+# /// 
+# /// Read the currently active PID set 
+# ///
+record(mbbi, "$(S)$(ND)Loop$(L):PID:ActiveSet")
+{
+  field(DESC, "Loop$(L) Output Num Sets")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),3,1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "Set 1")
+  field(ONST, "Set 2")
+  field(TWST, "Set 3")
+}
+
+# /// 
+# /// Read the PV boundary between set 1 ad 2 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Boundary12")
+{
+  field(DESC, "Loop$(L) PID Boundary12")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),4,1)")
+  field(SCAN, "I/O Intr")
+}
+
+# /// 
+# /// Read the PV boundary between set 2 ad 3 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:Boundary23")
+{
+  field(DESC, "Loop$(L) PID Boundary23")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),5,1)")
+  field(SCAN, "I/O Intr")
+}
+
+# /// 
+# /// The below records read the P, I and D values for 
+# /// sets 1 to 3. 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:PB1")
+{
+  field(DESC, "Loop$(L) PB1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),6,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:Ti1")
+{
+  field(DESC, "Loop$(L) Ti1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),7,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:Td1")
+{
+  field(DESC, "Loop$(L) Td1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),8,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:PB2")
+{
+  field(DESC, "Loop$(L) PB2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),14,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:Ti2")
+{
+  field(DESC, "Loop$(L) Ti2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),15,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:Td2")
+{
+  field(DESC, "Loop$(L) Td2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),16,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:PB3")
+{
+  field(DESC, "Loop$(L) PB3")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),22,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:Ti3")
+{
+  field(DESC, "Loop$(L) Ti3")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),23,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:Td3")
+{
+  field(DESC, "Loop$(L) Td3")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),24,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// The below records read the output limits for each PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh1")
+{
+  field(DESC, "Loop$(L) Output High 1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),30,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow1")
+{
+  field(DESC, "Loop$(L) Output Low 1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),31,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh2")
+{
+  field(DESC, "Loop$(L) Output High 2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),32,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow2")
+{
+  field(DESC, "Loop$(L) Output Low 2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),33,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh3")
+{
+  field(DESC, "Loop$(L) Output High 3")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),34,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow3")
+{
+  field(DESC, "Loop$(L) Output Low 3")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),35,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+############################################################
+# Write records
+############################################################
+
+# ///
+# /// Set the PID type
+# ///
+record(mbbo, "$(S)$(ND)Loop$(L):PID:TypeSet")
+{
+  field(DESC, "Set Loop$(L) PID Type")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,0,1)")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(ZRST, "Off")
+  field(ONST, "Set")
+  field(TWST, "Setpoint")
+  field(THST, "PV")
+  field(FRST, "Error")
+  field(FVST, "Output")
+  field(SXST, "Remote")  
+}
+
+# ///
+# /// Menu to select using a software table instead of the 
+# /// 3 controller PID sets. If we enable the software
+# /// table then we set NumSetsSet to "1 set" and set ActiveSetSet
+# /// to 1. The software table will then populate the parameters
+# /// of set 1.
+# ///
+record(bo, "$(S)$(ND)Loop$(L):PID:Source")
+{
+  field(DESC, "Controller/Software PID")
+  field(PINI, "YES")
+  field(VAL, "1")
+  field(ZNAM, "Controller PID")
+  field(ONAM, "Software PID")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalc")
+  info(autosaveFields, "VAL")
+}
+# If we are using the software table, set up the controller
+# appropriately and enable the table.
+record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalc")
+{
+  field(DESC, "Use 1 Set")
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Source.VAL")
+  field(CALC, "A==1")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:SourceCalcSet.PROC")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
+}
+record(seq, "$(S)$(ND)Loop$(L):PID:SourceCalcSet")
+{
+  field(DLY1, "0.1")
+  field(DLY2, "0.1")
+  field(DLY3, "0.1")
+  field(DO1, "1")
+  field(LNK1, "$(S)$(ND)Loop$(L):PID:TypeSet.VAL PP")
+  field(DO2, "0")
+  field(LNK2, "$(S)$(ND)Loop$(L):PID:NumSetsSet.VAL PP")
+  field(DO3, "0")
+  field(LNK3, "$(S)$(ND)Loop$(L):PID:ActiveSetSet.VAL PP")
+  field(DO4, "0")
+  field(LNK4, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
+}
+# and if we are not using the software PID table, disable the table
+record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
+{
+  field(INPA, "$(S)$(ND)Loop$(L):PID:Source.VAL")
+  field(CALC, "A==0")
+  field(OOPT, "When Non-zero")
+  field(DOPT, "Use CALC")
+  field(OUT, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
+}
+
+# /// 
+# /// Set the number of sets in use (1, 2 or 3). 
+# ///
+record(mbbo, "$(S)$(ND)Loop$(L):PID:NumSetsSet")
+{
+  field(DESC, "Set Loop$(L) PID Num Sets")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,1,1)")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "1 Set")
+  field(ONST, "2 Sets")
+  field(TWST, "3 Sets")
+}
+
+# ///
+# /// Set the PID set to use
+# /// This only works if we are in 'Set' PID Type. 
+# ///
+record(mbbo, "$(S)$(ND)Loop$(L):PID:ActiveSetSet")
+{
+  field(DESC, "Set Loop$(L) PID Active Set")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,3,1)")
+  field(ZRVL, "1")
+  field(ONVL, "2")
+  field(TWVL, "3")
+  field(ZRST, "Set 1")
+  field(ONST, "Set 2")
+  field(TWST, "Set 3")
+}
+
+# ///
+# /// Set the PV boundary between set 1 and 2 
+# ///
+record(ao, "$(S)$(ND)Loop$(L):PID:Boundary12Set")
+{
+  field(DESC, "Set Loop$(L) PID Boundary12")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,4,1)")
+}
+
+# /// 
+# /// Set the PV boundary between set 2 and 3 
+# ///
+record(ao, "$(S)$(ND)Loop$(L):PID:Boundary23Set")
+{
+  field(DESC, "Set Loop$(L) PID Boundary23")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,5,1)")
+}
+
+# ///
+# /// The following records allow setting of the 
+# /// PID parameters for each set.
+# ///
+
+record(ao, "$(S)$(ND)Loop$(L):PID:PB1Set")
+{
+  field(DESC, "Set Loop$(L) PB1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,6,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:Ti1Set")
+{
+  field(DESC, "Set Loop$(L) Ti1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,7,1)")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:Td1Set")
+{
+  field(DESC, "Set Loop$(L) Td1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,8,1)")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:PB2Set")
+{
+  field(DESC, "Set Loop$(L) PB2")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,14,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:Ti2Set")
+{
+  field(DESC, "Set Loop$(L) Ti2")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,15,1)")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:Td2Set")
+{
+  field(DESC, "Set Loop$(L) Td2")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,16,1)")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:PB3Set")
+{
+  field(DESC, "Set Loop$(L) PB3")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,22,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:Ti3Set")
+{
+  field(DESC, "Set Loop$(L) Ti3")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,23,1)")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:Td3Set")
+{
+  field(DESC, "Set Loop$(L) Td3")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,24,1)")
+  field(PREC, "0")
+  field(EGU, "sec")
+}
+
+# ///
+# /// The following records allow setting of the 
+# /// lower and high limits for the set output power.
+# ///
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh1Set")
+{
+  field(DESC, "Set Loop$(L) Output High 1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,30,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow1Set")
+{
+  field(DESC, "Set Loop$(L) Output Low 1")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,31,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh2Set")
+{
+  field(DESC, "Set Loop$(L) Output High 2")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,32,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow2Set")
+{
+  field(DESC, "Set Loop$(L) Output Low 2")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,33,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh3Set")
+{
+  field(DESC, "Set Loop$(L) Output High 3")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,34,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow3Set")
+{
+  field(DESC, "Set Loop$(L) Output Low 3")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,35,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+}
+
+#########################################################
+# Instantiate a software PID table for this control loop. 
+# The input PV is set to the Loop input PV, whatever that is
+# on the controller.
+
+substitute "PV=$(S)$(ND)Loop$(L):PV"
+substitute "UNITS=K"
+
+substitute "P_LINK=$(S)$(ND)Loop$(L):PID:PB1Set"
+substitute "I_LINK=$(S)$(ND)Loop$(L):PID:Ti1Set"
+substitute "D_LINK=$(S)$(ND)Loop$(L):PID:Td1Set"
+substitute "PL_LINK=$(S)$(ND)Loop$(L):PID:OutputLow1Set"
+substitute "PH_LINK=$(S)$(ND)Loop$(L):PID:OutputHigh1Set"
+
+substitute "W=1"
+include "pid_set_window.template"
+substitute "W=2"
+include "pid_set_window.template"
+substitute "W=3"
+include "pid_set_window.template"
+substitute "W=4"
+include "pid_set_window.template"
+substitute "W=5"
+include "pid_set_window.template"
+substitute "W=6"
+include "pid_set_window.template"
+substitute "W=7"
+include "pid_set_window.template"
+substitute "W=8"
+include "pid_set_window.template"
+substitute "W=9"
+include "pid_set_window.template"
+substitute "W=10"
+include "pid_set_window.template"
+substitute "W=11"
+include "pid_set_window.template"
+substitute "W=12"
+include "pid_set_window.template"
+substitute "W=13"
+include "pid_set_window.template"
+substitute "W=14"
+include "pid_set_window.template"
+substitute "W=15"
+include "pid_set_window.template"
+substitute "W=16"
+include "pid_set_window.template"
+
+# ///
+# /// Record to enable/disable the table
+# ///
+record(bo, "$(S)$(ND)Loop$(L):PID:TableControl")
+{
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(ZNAM, "Table Enabled")
+  field(ONAM, "Table Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MAJOR")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet")
+  info(autosaveFields, "VAL")
+}
+
+record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)Loop$(L):PID:TableControl")
+  field(OUTA, "$(S)$(ND)Loop$(L):PID:Set1:Disable PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):PID:Set2:Disable PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):PID:Set3:Disable PP")
+  field(OUTD, "$(S)$(ND)Loop$(L):PID:Set4:Disable PP")
+  field(OUTE, "$(S)$(ND)Loop$(L):PID:Set5:Disable PP")
+  field(OUTF, "$(S)$(ND)Loop$(L):PID:Set6:Disable PP")
+  field(OUTG, "$(S)$(ND)Loop$(L):PID:Set7:Disable PP")
+  field(OUTH, "$(S)$(ND)Loop$(L):PID:Set8:Disable PP")
+  field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
+}
+
+record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)Loop$(L):PID:TableControl")
+  field(OUTA, "$(S)$(ND)Loop$(L):PID:Set9:Disable PP")
+  field(OUTB, "$(S)$(ND)Loop$(L):PID:Set10:Disable PP")
+  field(OUTC, "$(S)$(ND)Loop$(L):PID:Set11:Disable PP")
+  field(OUTD, "$(S)$(ND)Loop$(L):PID:Set12:Disable PP")
+  field(OUTE, "$(S)$(ND)Loop$(L):PID:Set13:Disable PP")
+  field(OUTF, "$(S)$(ND)Loop$(L):PID:Set14:Disable PP")
+  field(OUTG, "$(S)$(ND)Loop$(L):PID:Set15:Disable PP")
+  field(OUTH, "$(S)$(ND)Loop$(L):PID:Set16:Disable PP")
+}

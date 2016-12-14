@@ -1,0 +1,107 @@
+
+#############################################################
+#
+# Database template to read and write loop setpoint variables 
+# for the eurotherm nanodac.  
+# 
+# S - base PV name
+# ND - name for this nanodac
+# L - loop number
+# PORT - asyn port name for loop setpoint data
+#
+# Note: By convention the port name for the writeable parameters
+# is the same as the read parameters, but with a 'w' on the end.
+# 
+############################################################
+
+############################################################
+# Read records
+############################################################
+
+# ///
+# /// Read the high limit on the setpoint
+# ///
+record(ai, "$(S)$(ND)Loop$(L):SP:HighLimit")
+{
+  field(DESC, "Loop$(L) SP High Limit")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),2,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+}
+
+# ///
+# /// Read the low limit on the setpoint
+# ///
+record(ai, "$(S)$(ND)Loop$(L):SP:LowLimit")
+{
+  field(DESC, "Loop$(L) SP Low Limit")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),3,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+}
+
+# ///
+# /// Read the rate limit on the setpoint change
+# /// This affects how fast the working setpoint can change.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):SP:Rate")
+{
+  field(DESC, "Loop$(L) SP Rate")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),6,1)")
+  field(SCAN, "I/O Intr")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(LINR, "LINEAR")
+}
+
+############################################################
+# Write records
+############################################################
+
+# ///
+# /// Set the high limit on the setpoint
+# ///
+record(ao, "$(S)$(ND)Loop$(L):SP:HighLimitSet")
+{
+  field(DESC, "Set Loop$(L) SP High Limit")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,2,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+}
+
+# ///
+# /// Set the low limit on the setpoint
+# ///
+record(ao, "$(S)$(ND)Loop$(L):SP:LowLimitSet")
+{
+  field(DESC, "Set Loop$(L) SP Low Limit")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,3,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+}
+
+# ///
+# /// Set the rate limit on the setpoint change.
+# /// This affects how fast the working setpoint can change.
+# ///
+record(ao, "$(S)$(ND)Loop$(L):SP:RateSet")
+{
+  field(DESC, "Set Loop$(L) SP Rate")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,6,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+}
+

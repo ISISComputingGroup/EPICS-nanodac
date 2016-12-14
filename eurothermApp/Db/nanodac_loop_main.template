@@ -1,0 +1,329 @@
+
+#############################################################
+#
+# Database template to read and write loop main variables 
+# for the eurotherm nanodac.  
+# 
+# S - base PV name
+# ND - name for this nanodac
+# L - loop number
+# PORT - asyn port name for loop main data
+#
+# Note: By convention the port name for the writeable parameters
+# is the same as the read parameters, but with a 'w' on the end.
+#
+############################################################
+
+############################################################
+# Read records
+############################################################
+
+# ///
+# /// Read the process variable used in this loop.
+# /// This is usually set up on the controller.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):PV")
+{
+  field(DESC, "Loop$(L) Process Variable")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),0,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the setpoint
+# ///
+record(ai, "$(S)$(ND)Loop$(L):SP")
+{
+  field(DESC, "Loop$(L) Setpoint")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),2,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the working setpoint
+# ///
+record(ai, "$(S)$(ND)Loop$(L):WSP")
+{
+  field(DESC, "Loop$(L) Working Setpoint")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),3,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the auto/manual setting
+# ///
+record(bi, "$(S)$(ND)Loop$(L):Auto")
+{
+  field(DESC, "Loop$(L) Auto/Man")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),1,1)")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "Auto")
+  field(ONAM, "Manual")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the working loop output 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Output")
+{
+  field(DESC, "Loop$(L) Output")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),4,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the loop inhibit status 
+# ///
+record(bi, "$(S)$(ND)Loop$(L):Inhibit")
+{
+  field(DESC, "Loop$(L) Inhibit")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),5,1)")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the if the setpoint ramp has been completed 
+# ///
+record(bi, "$(S)$(ND)Loop$(L):SP:RateDone")
+{
+  field(DESC, "Loop$(L) SP Rate Done")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),10,1)")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the loop error status 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:Error")
+{
+  field(DESC, "Loop$(L) Error")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),13,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the loop sensor break status 
+# ///
+record(bi, "$(S)$(ND)Loop$(L):Diag:SensorBreak")
+{
+  field(DESC, "Loop$(L) Sensor Break")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),19,1)")
+  field(SCAN, "I/O Intr")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MAJOR")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the loop output low limit 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:OutLow")
+{
+  field(DESC, "Loop$(L) Working Low Lim")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),20,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the loop output high limit
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:OutHigh")
+{
+  field(DESC, "Loop$(L) Working High Lim")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),21,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the proportional gain loop contribution 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:POut")
+{
+  field(DESC, "Loop$(L) Prop. Output")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),16,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the integral gain loop contribution 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:IOut")
+{
+  field(DESC, "Loop$(L) Integral Output")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),17,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Read the derivative gain loop contribution 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:DOut")
+{
+  field(DESC, "Loop$(L) Deriv. Output")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),18,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+############################################################
+# Write records
+############################################################
+
+# /// 
+# /// Set the loop auto/manual mode 
+# ///
+record(bo, "$(S)$(ND)Loop$(L):AutoSet")
+{
+  field(DESC, "Loop$(L) Auto/Man")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,1,1)")
+  field(ZNAM, "Auto")
+  field(ONAM, "Manual")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# /// 
+# /// Set the loop setpoint demand value 
+# ///
+record(ao, "$(S)$(ND)Loop$(L):SPSet")
+{
+  field(DESC, "Set Loop$(L) Setpoint")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,2,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(FLNK, "$(S)$(ND)Loop$(L):SPBusySet.PROC")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+############################################################
+# A few records to support put_callback on the setpoint. 
+# We use the busy record. A PV window is used. 
+# The PV must be within the window, before the callback is done.
+############################################################
+	
+record(dfanout, "$(S)$(ND)Loop$(L):SPBusySet")
+{
+  field(VAL, "0")
+  field(OUTA, "$(S)$(ND)Loop$(L):InWindow.VAL PP")
+  field(FLNK, "$(S)$(ND)Loop$(L):SPBusySet2")
+}
+record(dfanout, "$(S)$(ND)Loop$(L):SPBusySet2")
+{
+   field(VAL, "1")
+   field(OUTA, "$(S)$(ND)Loop$(L):SPBusy PP")
+   field(FLNK, "$(S)$(ND)Loop$(L):CalcInWindow")
+}
+record(busy, "$(S)$(ND)Loop$(L):SPBusy")
+{
+}
+record(calcout, "$(S)$(ND)Loop$(L):CalcInWindow") {
+  field(PINI, "YES")
+  field(INPA, "$(S)$(ND)Loop$(L):Tolerance.VAL")
+  field(INPB, "$(S)$(ND)Loop$(L):PV.VAL")
+  field(INPC, "$(S)$(ND)Loop$(L):SPSet.VAL")
+  field(CALC, "((B>=(C-A))&&(B<=(C+A)))?1:0")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)Loop$(L):InWindow.VAL PP")
+  field(DOPT, "Use CALC")
+  field(SCAN, "1 second")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, A B C VAL")   
+}
+record(ai, "$(S)$(ND)Loop$(L):Tolerance")
+{
+  field(PINI, "YES")
+  field(VAL, "$(TOLERANCE=1)")
+  info(autosaveFields, "VAL")
+  info(archive, "Monitor, 00:00:01, VAL")   
+}
+record(bo, "$(S)$(ND)Loop$(L):InWindow") {
+  field(DESC, "PV In Window")
+  field(VAL, "0")
+  field(PINI, "YES")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Not In Window")
+  field(ONAM, "In Window")
+  info(archive, "Monitor, 00:00:01, VAL")   
+}
+# ///
+# /// Set busy record 'done' when $(S)$(ND)Loop$(L):InWindow=1
+# ///
+record(calcout, "$(S)$(ND)Loop$(L):SPBusyDone") {
+  field(INPA, "$(S)$(ND)Loop$(L):InWindow.VAL CP")
+  field(CALC, "(A=1)?0:1")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)Loop$(L):SPBusy.VAL PP")
+}
+
+############################################################
+
+# /// 
+# /// Inhibit the loop output 
+# ///
+record(bo, "$(S)$(ND)Loop$(L):InhibitSet")
+{
+  field(DESC, "Set Loop$(L) Inhibit")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,5,1)")
+  field(ZNAM, "No")
+  field(ONAM, "Yes")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+

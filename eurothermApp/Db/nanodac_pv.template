@@ -1,0 +1,273 @@
+
+#############################################################
+#
+# Database template to read a real or virtual channel from the 
+# eurotherm nanodac. The PV data is in 2s compliment 16 bit number
+# with a decimal point read from another register. The status 
+# word and alarm word are in adjacent memory addresses. 
+# 
+# S - base PV name
+# ND - name of this nanodac
+# C - channel name
+# CI - channel index number (1-4 or 1-32 for virtual channels)
+# PORT - asyn port name for channel data
+# PV_OFFSET - word offset for $(PORT) to read the PV
+# STAT_OFFSET - word offset for $(PORT) to read the status
+# ALARM1_OFFSET - word offset for $(PORT) to read the alarm1
+# ALARM2_OFFSET - word offset for $(PORT) to read the alarm2
+#
+# NOTE: the asyn port name for the PV resolution must be $(PORT)res
+#
+############################################################
+
+# ///
+# /// Read the channel process variable
+# ///
+record(ai, "$(S)$(ND)$(C):PV")
+{
+  field(DESC, "$(C) Process Variable")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(PV_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(HHSV,"MAJOR")
+  field(LLSV,"MAJOR")
+  field(HYST,"0.0")
+  field(HIHI,"1000")
+  field(LOLO,"-1")
+  info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the channel status 
+# ///
+record(mbbi, "$(S)$(ND)$(C):Status")
+{
+  field(DESC, "$(C) Status")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(STAT_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(SXVL, "6")
+  field(SVVL, "7")
+  field(EIVL, "8")
+  field(NIVL, "9")
+  field(TEVL, "12")
+  field(ZRST, "Good")
+  field(ONST, "Off")
+  field(TWST, "Over Range")
+  field(THST, "Under Range")
+  field(FRST, "Hardware Error")
+  field(FVST, "Ranging")
+  field(SXST, "Overflow")
+  field(SVST, "Bad")
+  field(EIST, "Hardware Exceeded")
+  field(NIST, "No Data")
+  field(TEST, "Comm Channel Error")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "NO_ALARM")
+  field(TWSV, "MAJOR")
+  field(THSV, "MAJOR")
+  field(FRSV, "MAJOR")
+  field(FVSV, "MAJOR")
+  field(SXSV, "MAJOR")
+  field(SVSV, "MAJOR")
+  field(EISV, "MAJOR")
+  field(NISV, "MAJOR")
+  field(TESV, "MAJOR")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the channel alarm status 
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm1")
+{
+  field(DESC, "$(C) Alarm 1")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(ALARM_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Off")
+  field(ONST, "Active")
+  field(TWST, "Safe Not Ack")
+  field(THST, "Active Not Ack")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MINOR")
+  field(TWSV, "MINOR")
+  field(THSV, "MAJOR")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the channel alarm 2 status 
+# ///
+record(mbbi, "$(S)$(ND)$(C):Alarm2")
+{
+  field(DESC, "$(C) Alarm 2")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),$(ALARM2_OFFSET),1)")
+  field(SCAN, "I/O Intr")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Off")
+  field(ONST, "Active")
+  field(TWST, "Safe Not Ack")
+  field(THST, "Active Not Ack")
+  field(ZRSV, "NO_ALARM")
+  field(ONSV, "MINOR")
+  field(TWSV, "MINOR")
+  field(THSV, "MAJOR")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the channel resolution
+# /// Based on this, set the PREC and ESLO fields
+# /// in the $(S)$(ND)$(C):PV record.
+# ///
+record(ai, "$(S)$(ND)$(C):PV_Res")
+{
+  field(DESC, "$(C) Resolution")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT)$(CI)res,0,1)")
+  field(SCAN, "I/O Intr")
+  field(FLNK, "$(S)$(ND)$(C):PV_ResSetCalc")
+}
+
+record(calcout, "$(S)$(ND)$(C):PV_ResSetCalc")
+{
+  field(INPA, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
+  field(CALC, "1/(10**A)")
+  field(OUT, "$(S)$(ND)$(C):PV.ESLO PP")
+  field(FLNK, "$(S)$(ND)$(C):PV_ResSetPrec")
+}
+
+record(dfanout, "$(S)$(ND)$(C):PV_ResSetPrec")
+{
+  field(OMSL, "closed_loop")
+  field(DOL, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)$(C):PV.PREC PP")
+}
+
+# ///
+# /// Read the channel description (and units string).
+# ///
+record(waveform, "$(S)$(ND)$(C):DescRaw")
+{
+  field(DESC, "$(C) Desc")
+  field(DTYP, "asynInt32ArrayIn")
+  field(INP, "@asyn($(PORT)$(CI)str,0,1)")
+  field(SCAN, "I/O Intr")
+  field(FTVL, "LONG")
+  field(NELM, "25")
+  field(FLNK, "$(S)$(ND)$(C):Desc")
+}
+
+# ///
+# /// The channel description
+# ///
+record(subArray, "$(S)$(ND)$(C):Desc")
+{
+  field(DESC, "$(C) Description")
+  field(DTYP, "Soft Channel")
+  field(INP, "$(S)$(ND)$(C):DescRaw.VAL")
+  field(SCAN, "Passive")
+  field(FTVL, "CHAR")
+  field(NELM, "20")
+  field(MALM, "25")
+  field(INDX, "0")
+  field(FLNK, "$(S)$(ND)$(C):Units")
+}
+
+# ///
+# /// The channel units string
+# ///
+record(subArray, "$(S)$(ND)$(C):Units")
+{
+  field(DESC, "$(C) Units")
+  field(DTYP, "Soft Channel")
+  field(INP, "$(S)$(ND)$(C):DescRaw.VAL")
+  field(SCAN, "Passive")
+  field(FTVL, "CHAR")
+  field(NELM, "5")
+  field(MALM, "25")
+  field(INDX, "21")
+}
+
+###########################################################
+# Summarize the alarm on a per-channel basis
+###########################################################
+
+# ///
+# /// Alarm summary record for channel $(C)
+# /// This is a summary of the PV alarm state, the controller
+# /// alarm fields and the channel status.
+# ///
+record(calc, "$(S)$(ND)$(C):AlarmSummaryCalc") {
+  field(INPA, "$(S)$(ND)$(C):PV CP MS")
+  field(INPB, "$(S)$(ND)$(C):Status CP MS")
+  field(INPC, "$(S)$(ND)$(C):Alarm1 CP MS")
+  field(INPD, "$(S)$(ND)$(C):Alarm2 CP MS")
+  field(CALC, "A")
+  field(SDIS, "$(S)$(ND)$(C):AlarmDisable")
+  field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc2")  
+}
+
+record(calcout, "$(S)$(ND)$(C):AlarmSummaryCalc2") {
+  field(INPA, "$(S)$(ND)$(C):AlarmSummaryCalc.STAT")
+  field(CALC, "A!=0?1:0")
+  field(DOPT, "Use CALC")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)$(C):AlarmSummary PP")
+}
+
+record(bi, "$(S)$(ND)$(C):AlarmSummary") {
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Alarm")
+  field(OSV, "MAJOR")
+  field(PINI, "YES")
+  field(VAL, "0")  
+}
+
+# ///
+# /// Disable alarms for this channel
+# ///
+record(bo, "$(S)$(ND)$(C):AlarmDisable") {
+  field(DESC, "Disable Alarm")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Alarm Enabled")
+  field(ONAM, "Alarm Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MINOR")
+  field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// If we have disabled the alarm for this 
+# /// channel, zero the AlarmSummary PV.
+# ///
+record(calcout, "$(S)$(ND)$(C):AlarmDisableZero") {
+  field(INPA, "$(S)$(ND)$(C):AlarmDisable.VAL CP MS")
+  field(CALC, "A=1?0:1")
+  field(DOPT, "Use CALC")
+  field(OOPT, "When Zero")
+  field(OUT, "$(S)$(ND)$(C):AlarmSummary.VAL PP")
+}
+
+
+

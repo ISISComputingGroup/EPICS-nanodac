@@ -1,0 +1,402 @@
+
+############################################################
+#
+# Top level nanodac template. 
+# This instantiates the other nanodac templates. The Asyn modbus
+# port names defined in this file must match those setup in the 
+# st.cmd template files.
+#
+# S - base PV name
+# ND - PV name for this Nanodac
+# NI - index number for this Nanodac
+#
+############################################################
+
+# ///
+# /// Generic Asyn record.
+# /// Not useful for modbus params, but we can see the 
+# /// socket connect status via the CNCT field
+# ///
+record(asyn,"$(S)$(ND)Asyn")
+{
+    field(DTYP,"asynRecordDevice")
+    field(PORT,"n$(NI)ip")
+    field(ADDR,"0")
+}
+
+# ///
+# /// Set up the channels (4 real ones and 6 virtual ones)
+# ///
+
+substitute "PORT=n$(NI)ch"
+
+substitute "C=CH1"
+substitute "CI=1"
+substitute "PV_OFFSET=0"
+substitute "STAT_OFFSET=1"
+substitute "ALARM_OFFSET=2"
+substitute "ALARM2_OFFSET=3"
+include "nanodac_pv.template"
+
+substitute "C=CH2"
+substitute "CI=2"
+substitute "PV_OFFSET=4"
+substitute "STAT_OFFSET=5"
+substitute "ALARM_OFFSET=6"
+substitute "ALARM2_OFFSET=7"
+include "nanodac_pv.template"
+
+substitute "C=CH3"
+substitute "CI=3"
+substitute "PV_OFFSET=8"
+substitute "STAT_OFFSET=9"
+substitute "ALARM_OFFSET=10"
+substitute "ALARM2_OFFSET=11"
+include "nanodac_pv.template"
+
+substitute "C=CH4"
+substitute "CI=4"
+substitute "PV_OFFSET=12"
+substitute "STAT_OFFSET=13"
+substitute "ALARM_OFFSET=14"
+substitute "ALARM2_OFFSET=15"
+include "nanodac_pv.template"
+
+substitute "PORT=n$(NI)cv"
+
+substitute "C=VCH1"
+substitute "CI=1"
+substitute "PV_OFFSET=0"
+substitute "STAT_OFFSET=1"
+substitute "ALARM_OFFSET=2"
+substitute "ALARM2_OFFSET=3"
+include "nanodac_pv.template"
+
+substitute "C=VCH2"
+substitute "CI=2"
+substitute "PV_OFFSET=4"
+substitute "STAT_OFFSET=5"
+substitute "ALARM_OFFSET=6"
+substitute "ALARM2_OFFSET=7"
+include "nanodac_pv.template"
+
+substitute "C=VCH3"
+substitute "CI=3"
+substitute "PV_OFFSET=8"
+substitute "STAT_OFFSET=9"
+substitute "ALARM_OFFSET=10"
+substitute "ALARM2_OFFSET=11"
+include "nanodac_pv.template"
+
+substitute "C=VCH4"
+substitute "CI=4"
+substitute "PV_OFFSET=12"
+substitute "STAT_OFFSET=13"
+substitute "ALARM_OFFSET=14"
+substitute "ALARM2_OFFSET=15"
+include "nanodac_pv.template"
+
+substitute "C=VCH5"
+substitute "CI=5"
+substitute "PV_OFFSET=16"
+substitute "STAT_OFFSET=17"
+substitute "ALARM_OFFSET=18"
+substitute "ALARM2_OFFSET=19"
+include "nanodac_pv.template"
+
+substitute "C=VCH6"
+substitute "CI=6"
+substitute "PV_OFFSET=20"
+substitute "STAT_OFFSET=21"
+substitute "ALARM_OFFSET=22"
+substitute "ALARM2_OFFSET=23"
+include "nanodac_pv.template"
+
+# ///
+# /// Set up the loop control (loops 1 & 2)
+# ///
+
+substitute "L=1"
+substitute "PORT=n$(NI)l1"
+include "nanodac_loop_main.template"
+substitute "L=2"
+substitute "PORT=n$(NI)l2"
+include "nanodac_loop_main.template"
+
+substitute "L=1"
+substitute "PORT=n$(NI)l1o"
+include "nanodac_loop_output.template"
+substitute "L=2"
+substitute "PORT=n$(NI)l2o"
+include "nanodac_loop_output.template"
+
+substitute "L=1"
+substitute "PORT=n$(NI)l1p"
+include "nanodac_loop_pid.template"
+substitute "L=2"
+substitute "PORT=n$(NI)l2p"
+include "nanodac_loop_pid.template"
+
+substitute "L=1"
+substitute "PORT=n$(NI)l1o"
+include "nanodac_loop_setpoint.template"
+substitute "L=2"
+substitute "PORT=n$(NI)l2o"
+include "nanodac_loop_setpoint.template"
+
+# ///
+# /// Instantiate the user variables
+# ///
+
+substitute "U=1"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=0"
+substitute "LOW_OFFSET=1"
+substitute "VAL_OFFSET=2"
+substitute "STA_OFFSET=3"
+substitute "RES_OFFSET=4"
+include "nanodac_user.template"
+
+substitute "U=2"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=5"
+substitute "LOW_OFFSET=6"
+substitute "VAL_OFFSET=7"
+substitute "STA_OFFSET=8"
+substitute "RES_OFFSET=9"
+include "nanodac_user.template"
+
+substitute "U=3"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=10"
+substitute "LOW_OFFSET=11"
+substitute "VAL_OFFSET=12"
+substitute "STA_OFFSET=13"
+substitute "RES_OFFSET=14"
+include "nanodac_user.template"
+
+substitute "U=4"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=15"
+substitute "LOW_OFFSET=16"
+substitute "VAL_OFFSET=17"
+substitute "STA_OFFSET=18"
+substitute "RES_OFFSET=19"
+include "nanodac_user.template"
+
+substitute "U=5"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=20"
+substitute "LOW_OFFSET=21"
+substitute "VAL_OFFSET=22"
+substitute "STA_OFFSET=23"
+substitute "RES_OFFSET=24"
+include "nanodac_user.template"
+
+substitute "U=6"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=25"
+substitute "LOW_OFFSET=26"
+substitute "VAL_OFFSET=27"
+substitute "STA_OFFSET=28"
+substitute "RES_OFFSET=29"
+include "nanodac_user.template"
+
+substitute "U=7"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=30"
+substitute "LOW_OFFSET=31"
+substitute "VAL_OFFSET=32"
+substitute "STA_OFFSET=33"
+substitute "RES_OFFSET=34"
+include "nanodac_user.template"
+
+substitute "U=8"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=35"
+substitute "LOW_OFFSET=36"
+substitute "VAL_OFFSET=37"
+substitute "STA_OFFSET=38"
+substitute "RES_OFFSET=39"
+include "nanodac_user.template"
+
+substitute "U=9"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=40"
+substitute "LOW_OFFSET=41"
+substitute "VAL_OFFSET=42"
+substitute "STA_OFFSET=43"
+substitute "RES_OFFSET=44"
+include "nanodac_user.template"
+
+substitute "U=10"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=45"
+substitute "LOW_OFFSET=46"
+substitute "VAL_OFFSET=47"
+substitute "STA_OFFSET=48"
+substitute "RES_OFFSET=49"
+include "nanodac_user.template"
+
+substitute "U=11"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=50"
+substitute "LOW_OFFSET=51"
+substitute "VAL_OFFSET=52"
+substitute "STA_OFFSET=53"
+substitute "RES_OFFSET=54"
+include "nanodac_user.template"
+
+substitute "U=12"
+substitute "PORT=n$(NI)u"
+substitute "HIG_OFFSET=55"
+substitute "LOW_OFFSET=56"
+substitute "VAL_OFFSET=57"
+substitute "STA_OFFSET=58"
+substitute "RES_OFFSET=59"
+include "nanodac_user.template"
+
+
+# Set up the alarm control
+
+substitute "ACK_PORT=n$(NI)caack"
+
+substitute "C=CH1"
+substitute "CI=1"
+substitute "ACK1_OFFSET=0"
+substitute "ACK2_OFFSET=1"
+substitute "ALARM_PORT=n$(NI)c1a"
+include "nanodac_alarm.template"
+
+substitute "C=CH2"
+substitute "CI=2"
+substitute "ACK1_OFFSET=2"
+substitute "ACK2_OFFSET=3"
+substitute "ALARM_PORT=n$(NI)c2a"
+include "nanodac_alarm.template"
+
+substitute "C=CH3"
+substitute "CI=3"
+substitute "ACK1_OFFSET=4"
+substitute "ACK2_OFFSET=5"
+substitute "ALARM_PORT=n$(NI)c3a"
+include "nanodac_alarm.template"
+
+substitute "C=CH4"
+substitute "CI=4"
+substitute "ACK1_OFFSET=6"
+substitute "ACK2_OFFSET=7"
+substitute "ALARM_PORT=n$(NI)c4a"
+include "nanodac_alarm.template"
+
+substitute "ACK_PORT=n$(NI)caackv"
+
+substitute "C=VCH1"
+substitute "CI=1"
+substitute "ACK1_OFFSET=0"
+substitute "ACK2_OFFSET=1"
+substitute "ALARM_PORT=n$(NI)vc1a"
+include "nanodac_alarm.template"
+
+substitute "C=VCH2"
+substitute "CI=2"
+substitute "ACK1_OFFSET=2"
+substitute "ACK2_OFFSET=3"
+substitute "ALARM_PORT=n$(NI)vc2a"
+include "nanodac_alarm.template"
+
+substitute "C=VCH3"
+substitute "CI=3"
+substitute "ACK1_OFFSET=4"
+substitute "ACK2_OFFSET=5"
+substitute "ALARM_PORT=n$(NI)vc3a"
+include "nanodac_alarm.template"
+
+substitute "C=VCH4"
+substitute "CI=4"
+substitute "ACK1_OFFSET=6"
+substitute "ACK2_OFFSET=7"
+substitute "ALARM_PORT=n$(NI)vc4a"
+include "nanodac_alarm.template"
+
+substitute "C=VCH5"
+substitute "CI=5"
+substitute "ACK1_OFFSET=8"
+substitute "ACK2_OFFSET=9"
+substitute "ALARM_PORT=n$(NI)vc5a"
+include "nanodac_alarm.template"
+
+substitute "C=VCH6"
+substitute "CI=6"
+substitute "ACK1_OFFSET=10"
+substitute "ACK2_OFFSET=11"
+substitute "ALARM_PORT=n$(NI)vc6a"
+include "nanodac_alarm.template"
+
+###################################################################
+# Global Alarm Summary
+###################################################################
+
+# ///
+# /// Alarm summary record for all channels.
+# ///
+record(calc, "$(S)$(ND)AlarmSummaryCalc") {
+  field(INPA, "$(S)$(ND)CH1:AlarmSummary CP MS")
+  field(INPB, "$(S)$(ND)CH2:AlarmSummary CP MS")
+  field(INPC, "$(S)$(ND)CH3:AlarmSummary CP MS")
+  field(INPD, "$(S)$(ND)CH4:AlarmSummary CP MS")
+  field(INPE, "$(S)$(ND)VCH1:AlarmSummary CP MS")
+  field(INPF, "$(S)$(ND)VCH2:AlarmSummary CP MS")
+  field(INPG, "$(S)$(ND)VCH3:AlarmSummary CP MS")
+  field(INPH, "$(S)$(ND)VCH4:AlarmSummary CP MS")
+  field(INPI, "$(S)$(ND)VCH5:AlarmSummary CP MS")
+  field(INPJ, "$(S)$(ND)VCH6:AlarmSummary CP MS")
+  field(CALC, "A")
+  field(SDIS, "$(S)$(ND)AlarmDisable")
+  field(FLNK, "$(S)$(ND)AlarmSummaryCalc2")  
+}
+
+record(calcout, "$(S)$(ND)AlarmSummaryCalc2") {
+  field(INPA, "$(S)$(ND)AlarmSummaryCalc.STAT")
+  field(CALC, "A!=0?1:0")
+  field(DOPT, "Use CALC")
+  field(OOPT, "Every Time")
+  field(OUT, "$(S)$(ND)AlarmSummary PP")
+}
+
+record(bi, "$(S)$(ND)AlarmSummary") {
+  field(ZNAM, "No Alarm")
+  field(ONAM, "Alarm")
+  field(OSV, "MAJOR")
+  field(PINI, "YES")
+  field(VAL, "0")  
+}
+
+# ///
+# /// Disable alarms global alarms
+# ///
+record(bo, "$(S)$(ND)AlarmDisable") {
+  field(DESC, "Disable Alarm")
+  field(PINI, "YES")
+  field(VAL, "0")
+  field(OMSL, "supervisory")
+  field(ZNAM, "Alarm Enabled")
+  field(ONAM, "Alarm Disabled")
+  field(ZSV, "NO_ALARM")
+  field(OSV, "MINOR")
+  field(FLNK, "$(S)$(ND)AlarmSummaryCalc")
+  field(ASG, "ALWAYS")
+  info(autosaveFields, "VAL")
+}
+
+# ///
+# /// If we have disabled the alarm for this 
+# /// channel, zero the AlarmSummary PV.
+# ///
+record(calcout, "$(S)$(ND)AlarmDisableZero") {
+  field(INPA, "$(S)$(ND)AlarmDisable.VAL CP MS")
+  field(CALC, "A=1?0:1")
+  field(DOPT, "Use CALC")
+  field(OOPT, "When Zero")
+  field(OUT, "$(S)$(ND)AlarmSummary.VAL PP")
+}

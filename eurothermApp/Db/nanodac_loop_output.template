@@ -1,0 +1,232 @@
+
+#############################################################
+#
+# Database template to read and write loop output variables 
+# for the eurotherm nanodac.  
+# 
+# S - base PV name
+# ND - name for this nanodac
+# L - loop number
+# PORT - asyn port name for loop output data
+#
+# Note: By convention the port name for the writeable parameters
+# is the same as the read parameters, but with a 'w' on the end.
+#
+# The loop output params are offset by 17 words from the start
+# of the loop setpoint params.
+# 
+############################################################
+
+############################################################
+# Read records
+############################################################
+
+# ///
+# /// Read the output high limit
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Output:High")
+{
+  field(DESC, "Loop$(L) Output High")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),17,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the output low limit
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Output:Low")
+{
+  field(DESC, "Loop$(L) Output Low")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),18,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the output ramp rate.
+# /// This limits how fast the PID output can change.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Output:Rate")
+{
+  field(DESC, "Loop$(L) Output Rate")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),20,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the manual output power setting 
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Output:Manual")
+{
+  field(DESC, "Loop$(L) Output Man Setting")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),36,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the proportional gain parameter used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchPB")
+{
+  field(DESC, "Loop$(L) Sched PB")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),54,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the integral gain parameter used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchTi")
+{
+  field(DESC, "Loop$(L) Sched Ti")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),55,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the derivative gain parameter used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchTd")
+{
+  field(DESC, "Loop$(L) Sched Td")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),56,1)")
+  field(SCAN, "I/O Intr")
+  field(PREC, "0")
+  field(EGU, "sec")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the output high limit used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutHigh")
+{
+  field(DESC, "Loop$(L) Sched High Lim")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),62,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Read the output low limit used now 
+# /// for the current PID set.
+# ///
+record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutLow")
+{
+  field(DESC, "Loop$(L) Sched Low Lim")
+  field(DTYP, "asynInt32")
+  field(INP, "@asyn($(PORT),63,1)")
+  field(SCAN, "I/O Intr")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+############################################################
+# Write records
+############################################################
+
+# ///
+# /// Set the high limit for the output power
+# ///
+record(ao, "$(S)$(ND)Loop$(L):Output:HighSet")
+{
+  field(DESC, "Set Loop$(L) Output High")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,17,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Set the low limit for the output power
+# ///
+record(ao, "$(S)$(ND)Loop$(L):Output:LowSet")
+{
+  field(DESC, "Set Loop$(L) Output Low")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,18,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Set the ramp rate for the output power
+# /// This limits how fast the PID output can change.
+# ///
+record(ao, "$(S)$(ND)Loop$(L):Output:RateSet")
+{
+  field(DESC, "Set Loop$(L) Output Rate")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,20,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
+# ///
+# /// Set the manual output power setting 
+# ///
+record(ao, "$(S)$(ND)Loop$(L):Output:ManualSet")
+{
+  field(DESC, "Set Loop$(L) Output Man Setting")
+  field(DTYP, "asynInt32")
+  field(OUT, "@asyn($(PORT)w,36,1)")
+  field(LINR, "LINEAR")
+  field(ESLO, "0.1")
+  field(PREC, "1")
+  field(EGU, "%")
+  info(archive, "Monitor, 00:00:01, VAL")
+}
+
