@@ -125,7 +125,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Ti1")
   field(INP, "@asyn($(PORT),7,1)")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -136,7 +136,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td1")
   field(INP, "@asyn($(PORT),8,1)")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -160,7 +160,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Ti2")
   field(INP, "@asyn($(PORT),15,1)")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -171,7 +171,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td2")
   field(INP, "@asyn($(PORT),16,1)")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -195,7 +195,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Ti3")
   field(INP, "@asyn($(PORT),23,1)")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -206,7 +206,7 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td3")
   field(INP, "@asyn($(PORT),24,1)")
   field(SCAN, "I/O Intr")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
 }
 
@@ -441,7 +441,7 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Ti1Set")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,7,1)")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Td1Set")
@@ -450,7 +450,7 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Td1Set")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,8,1)")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:PB2Set")
@@ -470,7 +470,7 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Ti2Set")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,15,1)")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Td2Set")
@@ -479,7 +479,7 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Td2Set")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,16,1)")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:PB3Set")
@@ -499,7 +499,7 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Ti3Set")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,23,1)")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Td3Set")
@@ -508,7 +508,7 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Td3Set")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,24,1)")
   field(PREC, "0")
-  field(EGU, "sec")
+  field(EGU, "s")
 }
 
 # ///
