@@ -311,6 +311,7 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Prec:Res")
 {
   field(INP, "$(S)$(ND)$(C):PV_Res CP MS")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
+}
 
 record(calcout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
 {
@@ -319,6 +320,7 @@ record(calcout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
   field(DOPT, "Use CALC")
   field(OOPT, "On Change")
   field(OUT, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec.VAL PP")
+}
 
 record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec")
 {
@@ -332,6 +334,7 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec")
   field(OUTG, "$(S)$(ND)$(C):Alarm$(A):RefSet.ESLO NPP")
   field(OUTH, "$(S)$(ND)$(C):Alarm$(A):DevSet.ESLO NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec2")
+}
 
 record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec2")
 {
@@ -340,6 +343,7 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:EsloSetPrec2")
   field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Amount.ESLO PP")
   field(OUTB, "$(S)$(ND)$(C):Alarm$(A):AmountSet.ESLO NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec")
+}
 
 record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec")
 {
@@ -354,6 +358,7 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec")
   field(OUTG, "$(S)$(ND)$(C):Alarm$(A):RefSet.PREC NPP")
   field(OUTH, "$(S)$(ND)$(C):Alarm$(A):DevSet.PREC NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec2")
+}
 
 record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec2")
 {
@@ -362,6 +367,7 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetPrec2")
   field(OUTA, "$(S)$(ND)$(C):Alarm$(A):Amount.PREC PP")
   field(OUTB, "$(S)$(ND)$(C):Alarm$(A):AmountSet.PREC NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncHyst")
+}
 
 # ///
 # /// The following records read the readback and set the 
@@ -377,18 +383,21 @@ record(seq, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncHyst")
   field(DOL1, "$(S)$(ND)$(C):Alarm$(A):Hyst.VAL NPP MS")
   field(LNK1, "$(S)$(ND)$(C):Alarm$(A):HystSet NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncRef")
+}
 record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncRef")
 {
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)$(C):Alarm$(A):Ref.VAL NPP MS")
   field(OUTA, "$(S)$(ND)$(C):Alarm$(A):RefSet NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncThreshold")
+}
 record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncThreshold")
 {
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)$(C):Alarm$(A):Threshold.VAL NPP MS")
   field(OUTA, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet NPP")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncDev")
+}
 record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncDev")
 {
   field(OMSL, "closed_loop")

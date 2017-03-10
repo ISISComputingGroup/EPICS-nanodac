@@ -373,6 +373,7 @@ record(calc, "$(S)$(ND)AlarmSummaryCalc") {
   field(CALC, "A")
   field(SDIS, "$(S)$(ND)AlarmDisable")
   field(FLNK, "$(S)$(ND)AlarmSummaryCalc2")  
+}
 
 record(calcout, "$(S)$(ND)AlarmSummaryCalc2") {
   field(INPA, "$(S)$(ND)AlarmSummaryCalc.STAT")
@@ -380,6 +381,7 @@ record(calcout, "$(S)$(ND)AlarmSummaryCalc2") {
   field(DOPT, "Use CALC")
   field(OOPT, "Every Time")
   field(OUT, "$(S)$(ND)AlarmSummary PP")
+}
 
 record(bi, "$(S)$(ND)AlarmSummary") {
   field(ZNAM, "No Alarm")
@@ -387,6 +389,7 @@ record(bi, "$(S)$(ND)AlarmSummary") {
   field(OSV, "MAJOR")
   field(PINI, "YES")
   field(VAL, "0")  
+}
 
 # ///
 # /// Disable alarms global alarms
@@ -403,6 +406,7 @@ record(bo, "$(S)$(ND)AlarmDisable") {
   field(FLNK, "$(S)$(ND)AlarmSummaryCalc")
   field(ASG, "ALWAYS")
   info(autosaveFields, "VAL")
+}
 
 # ///
 # /// If we have disabled the alarm for this 
@@ -414,3 +418,4 @@ record(calcout, "$(S)$(ND)AlarmDisableZero") {
   field(DOPT, "Use CALC")
   field(OOPT, "When Zero")
   field(OUT, "$(S)$(ND)AlarmSummary.VAL PP")
+}

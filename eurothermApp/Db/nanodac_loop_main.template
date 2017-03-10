@@ -310,13 +310,16 @@ record(dfanout, "$(S)$(ND)Loop$(L):SPBusySet")
   field(VAL, "0")
   field(OUTA, "$(S)$(ND)Loop$(L):InWindow.VAL PP")
   field(FLNK, "$(S)$(ND)Loop$(L):SPBusySet2")
+}
 record(dfanout, "$(S)$(ND)Loop$(L):SPBusySet2")
 {
    field(VAL, "1")
    field(OUTA, "$(S)$(ND)Loop$(L):SPBusy PP")
    field(FLNK, "$(S)$(ND)Loop$(L):CalcInWindow")
+}
 record(busy, "$(S)$(ND)Loop$(L):SPBusy")
 {
+}
 record(calcout, "$(S)$(ND)Loop$(L):CalcInWindow") {
   field(PINI, "YES")
   field(INPA, "$(S)$(ND)Loop$(L):Tolerance.VAL")
@@ -329,12 +332,14 @@ record(calcout, "$(S)$(ND)Loop$(L):CalcInWindow") {
   field(SCAN, "1 second")
   field(PREC, "1")
   info(archive, "Monitor, 00:00:01, A B C VAL")   
+}
 record(ai, "$(S)$(ND)Loop$(L):Tolerance")
 {
   field(PINI, "YES")
   field(VAL, "$(TOLERANCE=1)")
   info(autosaveFields, "VAL")
   info(archive, "Monitor, 00:00:01, VAL")   
+}
 record(bo, "$(S)$(ND)Loop$(L):InWindow") {
   field(DESC, "PV In Window")
   field(VAL, "0")
@@ -343,6 +348,7 @@ record(bo, "$(S)$(ND)Loop$(L):InWindow") {
   field(ZNAM, "Not In Window")
   field(ONAM, "In Window")
   info(archive, "Monitor, 00:00:01, VAL")   
+}
 # ///
 # /// Set busy record 'done' when $(S)$(ND)Loop$(L):InWindow=1
 # ///
@@ -351,6 +357,7 @@ record(calcout, "$(S)$(ND)Loop$(L):SPBusyDone") {
   field(CALC, "(A=1)?0:1")
   field(OOPT, "Every Time")
   field(OUT, "$(S)$(ND)Loop$(L):SPBusy.VAL PP")
+}
 
 ############################################################
 

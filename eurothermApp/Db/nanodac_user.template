@@ -109,6 +109,7 @@ record(calcout, "$(S)$(ND)User$(U):ResSetCalc")
   field(DOPT, "Use CALC")
   field(OOPT, "On Change")
   field(OUT, "$(S)$(ND)User$(U):EsloSetPrec.VAL PP")
+}
 
 record(dfanout, "$(S)$(ND)User$(U):EsloSetPrec")
 {
@@ -120,6 +121,7 @@ record(dfanout, "$(S)$(ND)User$(U):EsloSetPrec")
   field(OUTE, "$(S)$(ND)User$(U):LowLimSet.ESLO NPP")
   field(OUTF, "$(S)$(ND)User$(U):ValSet.ESLO NPP")
   field(FLNK, "$(S)$(ND)User$(U):ResSetPrec")
+}
 
 record(dfanout, "$(S)$(ND)User$(U):ResSetPrec")
 {
@@ -132,6 +134,7 @@ record(dfanout, "$(S)$(ND)User$(U):ResSetPrec")
   field(OUTE, "$(S)$(ND)User$(U):LowLimSet.PREC NPP")
   field(OUTF, "$(S)$(ND)User$(U):ValSet.PREC NPP")
   field(FLNK, "$(S)$(ND)User$(U):SyncVal")
+}
 
 # ///
 # /// The following records read the readback and set the 
@@ -147,17 +150,20 @@ record(seq, "$(S)$(ND)User$(U):SyncVal")
   field(DOL1, "$(S)$(ND)User$(U):Val.VAL NPP MS")
   field(LNK1, "$(S)$(ND)User$(U):ValSet NPP")
   field(FLNK, "$(S)$(ND)User$(U):SyncHigh")
+}
 record(dfanout, "$(S)$(ND)User$(U):SyncHigh")
 {
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)User$(U):HighLim.VAL NPP MS")
   field(OUTA, "$(S)$(ND)User$(U):HighLimSet NPP")
   field(FLNK, "$(S)$(ND)User$(U):SyncLow")
+}
 record(dfanout, "$(S)$(ND)User$(U):SyncLow")
 {
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)User$(U):LowLim.VAL NPP MS")
   field(OUTA, "$(S)$(ND)User$(U):LowLimSet NPP")
+}
 
 
 ############################################################

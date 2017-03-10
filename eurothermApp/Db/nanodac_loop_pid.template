@@ -391,6 +391,7 @@ record(bo, "$(S)$(ND)Loop$(L):PID:Source")
   field(ONAM, "Software PID")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalc")
   info(autosaveFields, "VAL")
+}
 # If we are using the software table, set up the controller
 # appropriately and enable the table.
 record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalc")
@@ -402,6 +403,7 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalc")
   field(DOPT, "Use CALC")
   field(OUT, "$(S)$(ND)Loop$(L):PID:SourceCalcSet.PROC")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
+}
 record(seq, "$(S)$(ND)Loop$(L):PID:SourceCalcSet")
 {
   field(DLY1, "0.1")
@@ -415,6 +417,7 @@ record(seq, "$(S)$(ND)Loop$(L):PID:SourceCalcSet")
   field(LNK3, "$(S)$(ND)Loop$(L):PID:ActiveSetSet.VAL PP")
   field(DO4, "0")
   field(LNK4, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
+}
 # and if we are not using the software PID table, disable the table
 record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
 {
@@ -423,6 +426,7 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
   field(OOPT, "When Non-zero")
   field(DOPT, "Use CALC")
   field(OUT, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
+}
 
 # /// 
 # /// Set the number of sets in use (1, 2 or 3). 
@@ -757,6 +761,7 @@ record(bo, "$(S)$(ND)Loop$(L):PID:TableControl")
   field(OSV, "MAJOR")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet")
   info(autosaveFields, "VAL")
+}
 
 record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet")
 {
@@ -771,6 +776,7 @@ record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet")
   field(OUTG, "$(S)$(ND)Loop$(L):PID:Set7:Disable PP")
   field(OUTH, "$(S)$(ND)Loop$(L):PID:Set8:Disable PP")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
+}
 
 record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
 {
