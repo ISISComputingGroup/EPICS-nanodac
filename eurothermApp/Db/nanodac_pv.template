@@ -1,4 +1,3 @@
-
 #############################################################
 #
 # Database template to read a real or virtual channel from the 
@@ -35,8 +34,13 @@ record(ai, "$(S)$(ND)$(C):PV")
   field(HYST,"0.0")
   field(HIHI,"1000")
   field(LOLO,"-1")
+  field(EGU,"C")
+  info(INTEREST, "HIGH")
   info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
   info(archive, "Monitor, 00:00:01, VAL")
+	field(SIML, "$(S)$(ND):SIM")
+	field(SIOL, "$(S)$(ND)$(C):SIM:PV")
+	field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -82,6 +86,9 @@ record(mbbi, "$(S)$(ND)$(C):Status")
   field(NISV, "MAJOR")
   field(TESV, "MAJOR")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)$(C):SIM:Status")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -106,6 +113,9 @@ record(mbbi, "$(S)$(ND)$(C):Alarm1")
   field(TWSV, "MINOR")
   field(THSV, "MAJOR")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)$(C):SIM:Alarm1")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -130,6 +140,9 @@ record(mbbi, "$(S)$(ND)$(C):Alarm2")
   field(TWSV, "MINOR")
   field(THSV, "MAJOR")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)$(C):SIM:Alarm2")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -144,6 +157,9 @@ record(ai, "$(S)$(ND)$(C):PV_Res")
   field(INP, "@asyn($(PORT)$(CI)res,0,1)")
   field(SCAN, "I/O Intr")
   field(FLNK, "$(S)$(ND)$(C):PV_ResSetCalc")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)$(C):SIM:PV_Res")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(calcout, "$(S)$(ND)$(C):PV_ResSetCalc")
@@ -152,14 +168,12 @@ record(calcout, "$(S)$(ND)$(C):PV_ResSetCalc")
   field(CALC, "1/(10**A)")
   field(OUT, "$(S)$(ND)$(C):PV.ESLO PP")
   field(FLNK, "$(S)$(ND)$(C):PV_ResSetPrec")
-}
 
 record(dfanout, "$(S)$(ND)$(C):PV_ResSetPrec")
 {
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
   field(OUTA, "$(S)$(ND)$(C):PV.PREC PP")
-}
 
 # ///
 # /// Read the channel description (and units string).
@@ -173,6 +187,9 @@ record(waveform, "$(S)$(ND)$(C):DescRaw")
   field(FTVL, "LONG")
   field(NELM, "25")
   field(FLNK, "$(S)$(ND)$(C):Desc")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)$(C):SIM:DescRaw")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -189,7 +206,6 @@ record(subArray, "$(S)$(ND)$(C):Desc")
   field(MALM, "25")
   field(INDX, "0")
   field(FLNK, "$(S)$(ND)$(C):Units")
-}
 
 # ///
 # /// The channel units string
@@ -204,7 +220,6 @@ record(subArray, "$(S)$(ND)$(C):Units")
   field(NELM, "5")
   field(MALM, "25")
   field(INDX, "21")
-}
 
 ###########################################################
 # Summarize the alarm on a per-channel basis
@@ -223,7 +238,6 @@ record(calc, "$(S)$(ND)$(C):AlarmSummaryCalc") {
   field(CALC, "A")
   field(SDIS, "$(S)$(ND)$(C):AlarmDisable")
   field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc2")  
-}
 
 record(calcout, "$(S)$(ND)$(C):AlarmSummaryCalc2") {
   field(INPA, "$(S)$(ND)$(C):AlarmSummaryCalc.STAT")
@@ -231,7 +245,6 @@ record(calcout, "$(S)$(ND)$(C):AlarmSummaryCalc2") {
   field(DOPT, "Use CALC")
   field(OOPT, "Every Time")
   field(OUT, "$(S)$(ND)$(C):AlarmSummary PP")
-}
 
 record(bi, "$(S)$(ND)$(C):AlarmSummary") {
   field(ZNAM, "No Alarm")
@@ -239,7 +252,6 @@ record(bi, "$(S)$(ND)$(C):AlarmSummary") {
   field(OSV, "MAJOR")
   field(PINI, "YES")
   field(VAL, "0")  
-}
 
 # ///
 # /// Disable alarms for this channel
@@ -255,7 +267,6 @@ record(bo, "$(S)$(ND)$(C):AlarmDisable") {
   field(OSV, "MINOR")
   field(FLNK, "$(S)$(ND)$(C):AlarmSummaryCalc")
   info(autosaveFields, "VAL")
-}
 
 # ///
 # /// If we have disabled the alarm for this 
@@ -267,7 +278,47 @@ record(calcout, "$(S)$(ND)$(C):AlarmDisableZero") {
   field(DOPT, "Use CALC")
   field(OOPT, "When Zero")
   field(OUT, "$(S)$(ND)$(C):AlarmSummary.VAL PP")
+
+
+
+
+### SIMULATION RECORDS ###
+
+record(ai, "$(S)$(ND)$(C):SIM:PV_Res")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
 }
 
+record(waveform, "$(S)$(ND)$(C):SIM:DescRaw")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+    field(NELM, "25")
+    field(FTVL, "LONG")
+}
 
+record(mbbi, "$(S)$(ND)$(C):SIM:Status")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)$(C):SIM:PV")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbi, "$(S)$(ND)$(C):SIM:Alarm2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbi, "$(S)$(ND)$(C):SIM:Alarm1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
 

@@ -1,4 +1,3 @@
-
 #############################################################
 #
 # Database template to read and write loop setpoint variables 
@@ -30,6 +29,9 @@ record(ai, "$(S)$(ND)Loop$(L):SP:HighLimit")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:SP:HighLimit")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -44,6 +46,9 @@ record(ai, "$(S)$(ND)Loop$(L):SP:LowLimit")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:SP:LowLimit")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -59,6 +64,9 @@ record(ai, "$(S)$(ND)Loop$(L):SP:Rate")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(LINR, "LINEAR")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:SP:Rate")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 ############################################################
@@ -76,6 +84,9 @@ record(ao, "$(S)$(ND)Loop$(L):SP:HighLimitSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:SP:HighLimitSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -89,6 +100,9 @@ record(ao, "$(S)$(ND)Loop$(L):SP:LowLimitSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:SP:LowLimitSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -103,5 +117,47 @@ record(ao, "$(S)$(ND)Loop$(L):SP:RateSet")
   field(LINR, "LINEAR")
   field(ESLO, "0.1")
   field(PREC, "1")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:SP:RateSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
+}
+
+
+### SIMULATION RECORDS ###
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:SP:LowLimit")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:SP:LowLimitSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:SP:Rate")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:SP:HighLimit")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:SP:HighLimitSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:SP:RateSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
 }
 

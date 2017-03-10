@@ -1,4 +1,3 @@
-
 #############################################################
 #
 # Database template to read and write user variables
@@ -33,6 +32,9 @@ record(ai, "$(S)$(ND)User$(U):HighLim")
   field(INP, "@asyn($(PORT),$(HIG_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)User$(U):SIM:HighLim")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -45,6 +47,9 @@ record(ai, "$(S)$(ND)User$(U):LowLim")
   field(INP, "@asyn($(PORT),$(LOW_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)User$(U):SIM:LowLim")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -58,6 +63,9 @@ record(ai, "$(S)$(ND)User$(U):Val")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)User$(U):SIM:Val")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -72,6 +80,9 @@ record(bi, "$(S)$(ND)User$(U):Status")
   field(ZNAM, "Ok")
   field(ONAM, "Error")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)User$(U):SIM:Status")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -86,6 +97,9 @@ record(ai, "$(S)$(ND)User$(U):Res")
   field(INP, "@asyn($(PORT),$(RES_OFFSET),1)")
   field(SCAN, "I/O Intr")
   field(FLNK, "$(S)$(ND)User$(U):ResSetCalc")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)User$(U):SIM:Res")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(calcout, "$(S)$(ND)User$(U):ResSetCalc")
@@ -95,7 +109,6 @@ record(calcout, "$(S)$(ND)User$(U):ResSetCalc")
   field(DOPT, "Use CALC")
   field(OOPT, "On Change")
   field(OUT, "$(S)$(ND)User$(U):EsloSetPrec.VAL PP")
-}
 
 record(dfanout, "$(S)$(ND)User$(U):EsloSetPrec")
 {
@@ -107,7 +120,6 @@ record(dfanout, "$(S)$(ND)User$(U):EsloSetPrec")
   field(OUTE, "$(S)$(ND)User$(U):LowLimSet.ESLO NPP")
   field(OUTF, "$(S)$(ND)User$(U):ValSet.ESLO NPP")
   field(FLNK, "$(S)$(ND)User$(U):ResSetPrec")
-}
 
 record(dfanout, "$(S)$(ND)User$(U):ResSetPrec")
 {
@@ -120,7 +132,6 @@ record(dfanout, "$(S)$(ND)User$(U):ResSetPrec")
   field(OUTE, "$(S)$(ND)User$(U):LowLimSet.PREC NPP")
   field(OUTF, "$(S)$(ND)User$(U):ValSet.PREC NPP")
   field(FLNK, "$(S)$(ND)User$(U):SyncVal")
-}
 
 # ///
 # /// The following records read the readback and set the 
@@ -136,20 +147,17 @@ record(seq, "$(S)$(ND)User$(U):SyncVal")
   field(DOL1, "$(S)$(ND)User$(U):Val.VAL NPP MS")
   field(LNK1, "$(S)$(ND)User$(U):ValSet NPP")
   field(FLNK, "$(S)$(ND)User$(U):SyncHigh")
-}
 record(dfanout, "$(S)$(ND)User$(U):SyncHigh")
 {
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)User$(U):HighLim.VAL NPP MS")
   field(OUTA, "$(S)$(ND)User$(U):HighLimSet NPP")
   field(FLNK, "$(S)$(ND)User$(U):SyncLow")
-}
 record(dfanout, "$(S)$(ND)User$(U):SyncLow")
 {
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)User$(U):LowLim.VAL NPP MS")
   field(OUTA, "$(S)$(ND)User$(U):LowLimSet NPP")
-}
 
 
 ############################################################
@@ -165,6 +173,9 @@ record(ao, "$(S)$(ND)User$(U):HighLimSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,$(HIG_OFFSET),1)")
   field(LINR, "LINEAR")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)User$(U):SIM:HighLimSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -176,6 +187,9 @@ record(ao, "$(S)$(ND)User$(U):LowLimSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,$(LOW_OFFSET),1)")
   field(LINR, "LINEAR")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)User$(U):SIM:LowLimSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -187,7 +201,61 @@ record(ao, "$(S)$(ND)User$(U):ValSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,$(VAL_OFFSET),1)")
   field(LINR, "LINEAR")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)User$(U):SIM:ValSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 
+
+
+### SIMULATION RECORDS ###
+
+record(ao, "$(S)$(ND)User$(U):SIM:LowLimSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)User$(U):SIM:Res")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)User$(U):SIM:LowLim")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)User$(U):SIM:HighLimSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)User$(U):SIM:HighLim")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(bi, "$(S)$(ND)User$(U):SIM:Status")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)User$(U):SIM:Val")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)User$(U):SIM:ValSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
 

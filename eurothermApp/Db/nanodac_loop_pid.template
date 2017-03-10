@@ -1,4 +1,3 @@
-
 #############################################################
 #
 # Database template to read and write loop PID variables 
@@ -43,6 +42,9 @@ record(mbbi, "$(S)$(ND)Loop$(L):PID:Type")
   field(FRST, "Error")
   field(FVST, "Output")
   field(SXST, "Remote")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Type")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -60,6 +62,9 @@ record(mbbi, "$(S)$(ND)Loop$(L):PID:NumSets")
   field(ZRST, "1 Set")
   field(ONST, "2 Sets")
   field(TWST, "3 Sets")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:NumSets")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -77,6 +82,9 @@ record(mbbi, "$(S)$(ND)Loop$(L):PID:ActiveSet")
   field(ZRST, "Set 1")
   field(ONST, "Set 2")
   field(TWST, "Set 3")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:ActiveSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -88,6 +96,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Boundary12")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),4,1)")
   field(SCAN, "I/O Intr")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Boundary12")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -99,6 +110,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Boundary23")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT),5,1)")
   field(SCAN, "I/O Intr")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Boundary23")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -116,6 +130,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:PB1")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:PB1")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Ti1")
@@ -127,6 +144,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Ti1")
   field(PREC, "0")
   field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Ti1")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Td1")
@@ -138,6 +158,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td1")
   field(PREC, "0")
   field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Td1")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:PB2")
@@ -151,6 +174,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:PB2")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:PB2")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Ti2")
@@ -162,6 +188,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Ti2")
   field(PREC, "0")
   field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Ti2")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Td2")
@@ -173,6 +202,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td2")
   field(PREC, "0")
   field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Td2")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:PB3")
@@ -186,6 +218,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:PB3")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:PB3")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Ti3")
@@ -197,6 +232,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Ti3")
   field(PREC, "0")
   field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Ti3")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:Td3")
@@ -208,6 +246,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:Td3")
   field(PREC, "0")
   field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Td3")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -223,6 +264,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh1")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh1")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow1")
@@ -235,6 +279,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow1")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow1")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh2")
@@ -247,6 +294,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh2")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh2")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow2")
@@ -259,6 +309,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow2")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow2")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh3")
@@ -271,6 +324,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:OutputHigh3")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh3")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow3")
@@ -283,6 +339,9 @@ record(ai, "$(S)$(ND)Loop$(L):PID:OutputLow3")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow3")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 ############################################################
@@ -311,6 +370,9 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:TypeSet")
   field(FRST, "Error")
   field(FVST, "Output")
   field(SXST, "Remote")  
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:TypeSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -329,7 +391,6 @@ record(bo, "$(S)$(ND)Loop$(L):PID:Source")
   field(ONAM, "Software PID")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalc")
   info(autosaveFields, "VAL")
-}
 # If we are using the software table, set up the controller
 # appropriately and enable the table.
 record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalc")
@@ -341,7 +402,6 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalc")
   field(DOPT, "Use CALC")
   field(OUT, "$(S)$(ND)Loop$(L):PID:SourceCalcSet.PROC")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
-}
 record(seq, "$(S)$(ND)Loop$(L):PID:SourceCalcSet")
 {
   field(DLY1, "0.1")
@@ -355,7 +415,6 @@ record(seq, "$(S)$(ND)Loop$(L):PID:SourceCalcSet")
   field(LNK3, "$(S)$(ND)Loop$(L):PID:ActiveSetSet.VAL PP")
   field(DO4, "0")
   field(LNK4, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
-}
 # and if we are not using the software PID table, disable the table
 record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
 {
@@ -364,7 +423,6 @@ record(calcout, "$(S)$(ND)Loop$(L):PID:SourceCalcNoTable")
   field(OOPT, "When Non-zero")
   field(DOPT, "Use CALC")
   field(OUT, "$(S)$(ND)Loop$(L):PID:TableControl.VAL PP")
-}
 
 # /// 
 # /// Set the number of sets in use (1, 2 or 3). 
@@ -380,6 +438,9 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:NumSetsSet")
   field(ZRST, "1 Set")
   field(ONST, "2 Sets")
   field(TWST, "3 Sets")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:NumSetsSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -397,6 +458,9 @@ record(mbbo, "$(S)$(ND)Loop$(L):PID:ActiveSetSet")
   field(ZRST, "Set 1")
   field(ONST, "Set 2")
   field(TWST, "Set 3")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:ActiveSetSet")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -407,6 +471,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Boundary12Set")
   field(DESC, "Set Loop$(L) PID Boundary12")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,4,1)")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Boundary12Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # /// 
@@ -417,6 +484,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Boundary23Set")
   field(DESC, "Set Loop$(L) PID Boundary23")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(PORT)w,5,1)")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Boundary23Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -433,6 +503,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:PB1Set")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:PB1Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Ti1Set")
@@ -442,6 +515,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Ti1Set")
   field(OUT, "@asyn($(PORT)w,7,1)")
   field(PREC, "0")
   field(EGU, "s")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Ti1Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Td1Set")
@@ -451,6 +527,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Td1Set")
   field(OUT, "@asyn($(PORT)w,8,1)")
   field(PREC, "0")
   field(EGU, "s")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Td1Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:PB2Set")
@@ -462,6 +541,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:PB2Set")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:PB2Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Ti2Set")
@@ -471,6 +553,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Ti2Set")
   field(OUT, "@asyn($(PORT)w,15,1)")
   field(PREC, "0")
   field(EGU, "s")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Ti2Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Td2Set")
@@ -480,6 +565,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Td2Set")
   field(OUT, "@asyn($(PORT)w,16,1)")
   field(PREC, "0")
   field(EGU, "s")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Td2Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:PB3Set")
@@ -491,6 +579,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:PB3Set")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:PB3Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Ti3Set")
@@ -500,6 +591,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Ti3Set")
   field(OUT, "@asyn($(PORT)w,23,1)")
   field(PREC, "0")
   field(EGU, "s")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Ti3Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:Td3Set")
@@ -509,6 +603,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:Td3Set")
   field(OUT, "@asyn($(PORT)w,24,1)")
   field(PREC, "0")
   field(EGU, "s")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:Td3Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 # ///
@@ -525,6 +622,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh1Set")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh1Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow1Set")
@@ -536,6 +636,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow1Set")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow1Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh2Set")
@@ -547,6 +650,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh2Set")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh2Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow2Set")
@@ -558,6 +664,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow2Set")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow2Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh3Set")
@@ -569,6 +678,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:OutputHigh3Set")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh3Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow3Set")
@@ -580,6 +692,9 @@ record(ao, "$(S)$(ND)Loop$(L):PID:OutputLow3Set")
   field(ESLO, "0.1")
   field(PREC, "1")
   field(EGU, "%")
+    field(SIML, "$(S)$(ND):SIM")
+    field(SIOL, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow3Set")
+    field(SDIS, "$(S)$(ND):DISABLE")
 }
 
 #########################################################
@@ -642,7 +757,6 @@ record(bo, "$(S)$(ND)Loop$(L):PID:TableControl")
   field(OSV, "MAJOR")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet")
   info(autosaveFields, "VAL")
-}
 
 record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet")
 {
@@ -657,7 +771,6 @@ record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet")
   field(OUTG, "$(S)$(ND)Loop$(L):PID:Set7:Disable PP")
   field(OUTH, "$(S)$(ND)Loop$(L):PID:Set8:Disable PP")
   field(FLNK, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
-}
 
 record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
 {
@@ -671,4 +784,246 @@ record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
   field(OUTF, "$(S)$(ND)Loop$(L):PID:Set14:Disable PP")
   field(OUTG, "$(S)$(ND)Loop$(L):PID:Set15:Disable PP")
   field(OUTH, "$(S)$(ND)Loop$(L):PID:Set16:Disable PP")
+
+### SIMULATION RECORDS ###
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow3Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
 }
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:Td3Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:Boundary12")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:Td2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow1Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:PB3")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:PB3Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:Ti1Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbo, "$(S)$(ND)Loop$(L):SIM:PID:ActiveSetSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:Td1Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:PB1Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:Ti3Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:Td3")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:Ti2Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:Td1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh3")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:Boundary23Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow3")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:PB1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:PB2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh3Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbo, "$(S)$(ND)Loop$(L):SIM:PID:NumSetsSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:Boundary12Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbi, "$(S)$(ND)Loop$(L):SIM:PID:ActiveSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:Td2Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:PB2Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:Ti1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh1Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:Ti3")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:Ti2")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:OutputHigh2Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbi, "$(S)$(ND)Loop$(L):SIM:PID:Type")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ao, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow2Set")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:Boundary23")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbi, "$(S)$(ND)Loop$(L):SIM:PID:NumSets")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(mbbo, "$(S)$(ND)Loop$(L):SIM:PID:TypeSet")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
+record(ai, "$(S)$(ND)Loop$(L):SIM:PID:OutputLow1")
+{
+    field(SCAN, "Passive")
+    field(DTYP, "Soft Channel")
+}
+
