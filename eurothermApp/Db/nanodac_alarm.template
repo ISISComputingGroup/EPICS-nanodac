@@ -29,9 +29,9 @@ record(bo, "$(S)$(ND)$(C):Alarm1AckSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ACK_PORT)w,$(ACK1_OFFSET),1)")
   field(VAL, "1")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):SIM:Alarm1AckSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -43,9 +43,9 @@ record(bo, "$(S)$(ND)$(C):Alarm2AckSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ACK_PORT)w,$(ACK2_OFFSET),1)")
   field(VAL, "1")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):SIM:Alarm2AckSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 ############################################################

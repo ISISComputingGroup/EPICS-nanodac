@@ -38,9 +38,9 @@ record(ai, "$(S)$(ND)$(C):PV")
   info(INTEREST, "HIGH")
   info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
   info(archive, "Monitor, 00:00:01, VAL")
-	field(SIML, "$(S)$(ND):SIM")
+	field(SIML, "$(S)$(ND)SIM")
 	field(SIOL, "$(S)$(ND)$(C):SIM:PV")
-	field(SDIS, "$(S)$(ND):DISABLE")
+	field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -86,9 +86,9 @@ record(mbbi, "$(S)$(ND)$(C):Status")
   field(NISV, "MAJOR")
   field(TESV, "MAJOR")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):SIM:Status")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -113,9 +113,9 @@ record(mbbi, "$(S)$(ND)$(C):Alarm1")
   field(TWSV, "MINOR")
   field(THSV, "MAJOR")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):SIM:Alarm1")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -140,9 +140,9 @@ record(mbbi, "$(S)$(ND)$(C):Alarm2")
   field(TWSV, "MINOR")
   field(THSV, "MAJOR")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):SIM:Alarm2")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -157,9 +157,9 @@ record(ai, "$(S)$(ND)$(C):PV_Res")
   field(INP, "@asyn($(PORT)$(CI)res,0,1)")
   field(SCAN, "I/O Intr")
   field(FLNK, "$(S)$(ND)$(C):PV_ResSetCalc")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):SIM:PV_Res")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 record(calcout, "$(S)$(ND)$(C):PV_ResSetCalc")
@@ -189,9 +189,9 @@ record(waveform, "$(S)$(ND)$(C):DescRaw")
   field(FTVL, "LONG")
   field(NELM, "25")
   field(FLNK, "$(S)$(ND)$(C):Desc")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):SIM:DescRaw")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -286,7 +286,7 @@ record(calcout, "$(S)$(ND)$(C):AlarmDisableZero") {
   field(DOPT, "Use CALC")
   field(OOPT, "When Zero")
   field(OUT, "$(S)$(ND)$(C):AlarmSummary.VAL PP")
-
+}
 
 
 

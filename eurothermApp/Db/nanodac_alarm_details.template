@@ -54,9 +54,9 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Type")
   field(EIST, "Dig Off")
   field(NIST, "Dig High")
   field(TEST, "Dig Low")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:Type")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -76,9 +76,9 @@ record(mbbi, "$(S)$(ND)$(C):Alarm$(A):Latch")
   field(ONST, "Auto")
   field(TWST, "Manual")
   field(THST, "Trigger")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:Latch")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -91,9 +91,9 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Threshold")
   field(INP, "@asyn($(ALARM_PORT_A),3,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:Threshold")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -106,9 +106,9 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Hyst")
   field(INP, "@asyn($(ALARM_PORT_A),4,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:Hyst")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -122,9 +122,9 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Ref")
   field(INP, "@asyn($(ALARM_PORT_A),6,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:Ref")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -139,9 +139,9 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Dev")
   field(INP, "@asyn($(ALARM_PORT_A),7,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:Dev")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -155,9 +155,9 @@ record(ai, "$(S)$(ND)$(C):Alarm$(A):Amount")
   field(INP, "@asyn($(ALARM_PORT_A),8,1)")
   field(SCAN, "I/O Intr")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:Amount")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 ############################################################
@@ -196,9 +196,9 @@ record(mbbo, "$(S)$(ND)$(C):Alarm$(A):TypeSet")
   field(EIST, "Dig Off")
   field(NIST, "Dig High")
   field(TEST, "Dig Low")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:TypeSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -219,9 +219,9 @@ record(mbbo, "$(S)$(ND)$(C):Alarm$(A):LatchSet")
   field(ONST, "Auto")
   field(TWST, "Manual")
   field(THST, "Trigger")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:LatchSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -233,9 +233,9 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):ThresholdSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,3,1)")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:ThresholdSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -247,9 +247,9 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):HystSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,4,1)")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:HystSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -262,9 +262,9 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):RefSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,6,1)")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:RefSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -278,9 +278,9 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):DevSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,7,1)")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:DevSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # /// 
@@ -293,9 +293,9 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):AmountSet")
   field(DTYP, "asynInt32")
   field(OUT, "@asyn($(ALARM_PORT_A)w,8,1)")
   field(LINR, "LINEAR")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)$(C):Alarm$(A):SIM:AmountSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 ############################################################
@@ -403,7 +403,7 @@ record(dfanout, "$(S)$(ND)$(C):Alarm$(A):Prec:SyncDev")
   field(OMSL, "closed_loop")
   field(DOL, "$(S)$(ND)$(C):Alarm$(A):Dev.VAL NPP MS")
   field(OUTA, "$(S)$(ND)$(C):Alarm$(A):DevSet NPP")
-
+}
 
 ### SIMULATION RECORDS ###
 
@@ -490,4 +490,5 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):SIM:AmountSet")
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
 }
+
 

@@ -34,9 +34,9 @@ record(ai, "$(S)$(ND)Loop$(L):Output:High")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Output:High")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -53,9 +53,9 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Low")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Output:Low")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -72,9 +72,9 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Rate")
   field(ESLO, "0.1")
   field(PREC, "1")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Output:Rate")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -91,9 +91,9 @@ record(ai, "$(S)$(ND)Loop$(L):Output:Manual")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Output:Manual")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -111,9 +111,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchPB")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Diag:SchPB")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -129,9 +129,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchTi")
   field(PREC, "0")
   field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Diag:SchTi")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -147,9 +147,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchTd")
   field(PREC, "0")
   field(EGU, "s")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Diag:SchTd")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -167,9 +167,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutHigh")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Diag:SchOutHigh")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -187,9 +187,9 @@ record(ai, "$(S)$(ND)Loop$(L):Diag:SchOutLow")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Diag:SchOutLow")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 ############################################################
@@ -209,9 +209,9 @@ record(ao, "$(S)$(ND)Loop$(L):Output:HighSet")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Output:HighSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -227,9 +227,9 @@ record(ao, "$(S)$(ND)Loop$(L):Output:LowSet")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Output:LowSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -245,9 +245,9 @@ record(ao, "$(S)$(ND)Loop$(L):Output:RateSet")
   field(ESLO, "0.1")
   field(PREC, "1")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Output:RateSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 # ///
@@ -263,9 +263,9 @@ record(ao, "$(S)$(ND)Loop$(L):Output:ManualSet")
   field(PREC, "1")
   field(EGU, "%")
   info(archive, "Monitor, 00:00:01, VAL")
-    field(SIML, "$(S)$(ND):SIM")
+    field(SIML, "$(S)$(ND)SIM")
     field(SIOL, "$(S)$(ND)Loop$(L):SIM:Output:ManualSet")
-    field(SDIS, "$(S)$(ND):DISABLE")
+    field(SDIS, "$(S)$(ND)DISABLE")
 }
 
 
