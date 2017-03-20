@@ -22,7 +22,7 @@
 # ///
 # /// Read the channel process variable
 # ///
-record(ai, "$(S)$(ND)$(C):PV")
+record(ai, "$(S)$(ND)$(C):TEMP")
 {
   field(DESC, "$(C) Process Variable")
   field(DTYP, "asynInt32")
@@ -39,7 +39,7 @@ record(ai, "$(S)$(ND)$(C):PV")
   info(autosaveFields, "HIHI LOLO ADEL MDEL HYST")
   info(archive, "Monitor, 00:00:01, VAL")
 	field(SIML, "$(S)$(ND)SIM")
-	field(SIOL, "$(S)$(ND)$(C):SIM:PV")
+	field(SIOL, "$(S)$(ND)$(C):SIM:TEMP")
 	field(SDIS, "$(S)$(ND)DISABLE")
 }
 
@@ -148,33 +148,33 @@ record(mbbi, "$(S)$(ND)$(C):Alarm2")
 # ///
 # /// Read the channel resolution
 # /// Based on this, set the PREC and ESLO fields
-# /// in the $(S)$(ND)$(C):PV record.
+# /// in the $(S)$(ND)$(C):TEMP record.
 # ///
-record(ai, "$(S)$(ND)$(C):PV_Res")
+record(ai, "$(S)$(ND)$(C):TEMP_Res")
 {
   field(DESC, "$(C) Resolution")
   field(DTYP, "asynInt32")
   field(INP, "@asyn($(PORT)$(CI)res,0,1)")
   field(SCAN, "I/O Intr")
-  field(FLNK, "$(S)$(ND)$(C):PV_ResSetCalc")
+  field(FLNK, "$(S)$(ND)$(C):TEMP_ResSetCalc")
     field(SIML, "$(S)$(ND)SIM")
-    field(SIOL, "$(S)$(ND)$(C):SIM:PV_Res")
+    field(SIOL, "$(S)$(ND)$(C):SIM:TEMP_Res")
     field(SDIS, "$(S)$(ND)DISABLE")
 }
 
-record(calcout, "$(S)$(ND)$(C):PV_ResSetCalc")
+record(calcout, "$(S)$(ND)$(C):TEMP_ResSetCalc")
 {
-  field(INPA, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
+  field(INPA, "$(S)$(ND)$(C):TEMP_Res.VAL NPP MS")
   field(CALC, "1/(10**A)")
-  field(OUT, "$(S)$(ND)$(C):PV.ESLO PP")
-  field(FLNK, "$(S)$(ND)$(C):PV_ResSetPrec")
+  field(OUT, "$(S)$(ND)$(C):TEMP.ESLO PP")
+  field(FLNK, "$(S)$(ND)$(C):TEMP_ResSetPrec")
 }
 
-record(dfanout, "$(S)$(ND)$(C):PV_ResSetPrec")
+record(dfanout, "$(S)$(ND)$(C):TEMP_ResSetPrec")
 {
   field(OMSL, "closed_loop")
-  field(DOL, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
-  field(OUTA, "$(S)$(ND)$(C):PV.PREC PP")
+  field(DOL, "$(S)$(ND)$(C):TEMP_Res.VAL NPP MS")
+  field(OUTA, "$(S)$(ND)$(C):TEMP.PREC PP")
 }
 
 # ///
@@ -235,7 +235,7 @@ record(subArray, "$(S)$(ND)$(C):Units")
 # /// alarm fields and the channel status.
 # ///
 record(calc, "$(S)$(ND)$(C):AlarmSummaryCalc") {
-  field(INPA, "$(S)$(ND)$(C):PV CP MS")
+  field(INPA, "$(S)$(ND)$(C):TEMP CP MS")
   field(INPB, "$(S)$(ND)$(C):Status CP MS")
   field(INPC, "$(S)$(ND)$(C):Alarm1 CP MS")
   field(INPD, "$(S)$(ND)$(C):Alarm2 CP MS")
@@ -292,7 +292,7 @@ record(calcout, "$(S)$(ND)$(C):AlarmDisableZero") {
 
 ### SIMULATION RECORDS ###
 
-record(ai, "$(S)$(ND)$(C):SIM:PV_Res")
+record(ai, "$(S)$(ND)$(C):SIM:TEMP_Res")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")
@@ -312,7 +312,7 @@ record(mbbi, "$(S)$(ND)$(C):SIM:Status")
     field(DTYP, "Soft Channel")
 }
 
-record(ai, "$(S)$(ND)$(C):SIM:PV")
+record(ai, "$(S)$(ND)$(C):SIM:TEMP")
 {
     field(SCAN, "Passive")
     field(DTYP, "Soft Channel")

@@ -309,13 +309,13 @@ record(ao, "$(S)$(ND)$(C):Alarm$(A):AmountSet")
 # ///
 record(ai, "$(S)$(ND)$(C):Alarm$(A):Prec:Res")
 {
-  field(INP, "$(S)$(ND)$(C):PV_Res CP MS")
+  field(INP, "$(S)$(ND)$(C):TEMP_Res CP MS")
   field(FLNK, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
 }
 
 record(calcout, "$(S)$(ND)$(C):Alarm$(A):Prec:ResSetCalc")
 {
-  field(INPA, "$(S)$(ND)$(C):PV_Res.VAL NPP MS")
+  field(INPA, "$(S)$(ND)$(C):TEMP_Res.VAL NPP MS")
   field(CALC, "1/(10**A)")
   field(DOPT, "Use CALC")
   field(OOPT, "On Change")
