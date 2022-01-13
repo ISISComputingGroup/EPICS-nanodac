@@ -790,6 +790,7 @@ record(dfanout, "$(S)$(ND)Loop$(L):PID:TableControlSet2")
   field(OUTF, "$(S)$(ND)Loop$(L):PID:Set14:Disable PP")
   field(OUTG, "$(S)$(ND)Loop$(L):PID:Set15:Disable PP")
   field(OUTH, "$(S)$(ND)Loop$(L):PID:Set16:Disable PP")
+}
 
 ### SIMULATION RECORDS ###
 
