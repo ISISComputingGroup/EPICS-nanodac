@@ -25,10 +25,9 @@
 record(ai, "$(S)$(ND)$(C):TEMP")
 {
   field(DESC, "$(C) Process Variable")
-  field(DTYP, "asynInt32")
-  field(INP, "@asyn($(PORT),$(PV_OFFSET),1)")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn($(PORT)f,$(PV_OFFSET),1)")
   field(SCAN, "I/O Intr")
-  field(LINR, "LINEAR")
   field(HHSV,"MAJOR")
   field(LLSV,"MAJOR")
   field(HYST,"0.0")
