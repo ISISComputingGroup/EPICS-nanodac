@@ -432,7 +432,7 @@ record(ai, "$(S)$(ND)ADVLOOP:TARGET")
 {
   field(DESC, "Advanced loop target")
   field(DTYP, "asynFloat64")
-  field(INP, "@asyn(n1al,0)")
+  field(INP, "@asyn(n$(NI)al,0)")
   field(SCAN, "I/O Intr")
 }
 
