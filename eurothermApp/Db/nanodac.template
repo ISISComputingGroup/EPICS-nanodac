@@ -440,6 +440,6 @@ record(ao, "$(S)$(ND)ADVLOOP:TARGET:SP")
 {
   field(DESC, "Advanced loop target")
   field(DTYP, "asynFloat64")
-  field(OUT, "@asyn(n1alw,0)")
+  field(OUT, "@asyn(n$(NI)alw,0)")
   field(SCAN, "Passive")
 }
