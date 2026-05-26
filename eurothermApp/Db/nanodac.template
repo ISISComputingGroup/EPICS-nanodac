@@ -59,7 +59,8 @@ include "nanodac_pv.template"
 
 substitute "C=CH2"
 substitute "CI=2"
-substitute "PV_OFFSET=4"
+# pv offset doubled as reading from float port
+substitute "PV_OFFSET=8"
 substitute "STAT_OFFSET=5"
 substitute "ALARM_OFFSET=6"
 substitute "ALARM2_OFFSET=7"
@@ -67,7 +68,8 @@ include "nanodac_pv.template"
 
 substitute "C=CH3"
 substitute "CI=3"
-substitute "PV_OFFSET=8"
+# pv offset doubled as reading from float port
+substitute "PV_OFFSET=16"
 substitute "STAT_OFFSET=9"
 substitute "ALARM_OFFSET=10"
 substitute "ALARM2_OFFSET=11"
@@ -75,7 +77,8 @@ include "nanodac_pv.template"
 
 substitute "C=CH4"
 substitute "CI=4"
-substitute "PV_OFFSET=12"
+# pv offset doubled as reading from float port
+substitute "PV_OFFSET=24"
 substitute "STAT_OFFSET=13"
 substitute "ALARM_OFFSET=14"
 substitute "ALARM2_OFFSET=15"
@@ -93,7 +96,8 @@ include "nanodac_pv.template"
 
 substitute "C=VCH2"
 substitute "CI=2"
-substitute "PV_OFFSET=4"
+# pv offset doubled as reading from float port
+substitute "PV_OFFSET=8"
 substitute "STAT_OFFSET=5"
 substitute "ALARM_OFFSET=6"
 substitute "ALARM2_OFFSET=7"
@@ -101,7 +105,8 @@ include "nanodac_pv.template"
 
 substitute "C=VCH3"
 substitute "CI=3"
-substitute "PV_OFFSET=8"
+# pv offset doubled as reading from float port
+substitute "PV_OFFSET=16"
 substitute "STAT_OFFSET=9"
 substitute "ALARM_OFFSET=10"
 substitute "ALARM2_OFFSET=11"
@@ -109,7 +114,8 @@ include "nanodac_pv.template"
 
 substitute "C=VCH4"
 substitute "CI=4"
-substitute "PV_OFFSET=12"
+# pv offset doubled as reading from float port
+substitute "PV_OFFSET=24"
 substitute "STAT_OFFSET=13"
 substitute "ALARM_OFFSET=14"
 substitute "ALARM2_OFFSET=15"
@@ -117,7 +123,8 @@ include "nanodac_pv.template"
 
 substitute "C=VCH5"
 substitute "CI=5"
-substitute "PV_OFFSET=16"
+# pv offset doubled as reading from float port
+substitute "PV_OFFSET=32"
 substitute "STAT_OFFSET=17"
 substitute "ALARM_OFFSET=18"
 substitute "ALARM2_OFFSET=19"
@@ -125,7 +132,8 @@ include "nanodac_pv.template"
 
 substitute "C=VCH6"
 substitute "CI=6"
-substitute "PV_OFFSET=20"
+# pv offset doubled as reading from float port
+substitute "PV_OFFSET=40"
 substitute "STAT_OFFSET=21"
 substitute "ALARM_OFFSET=22"
 substitute "ALARM2_OFFSET=23"
@@ -418,4 +426,20 @@ record(calcout, "$(S)$(ND)AlarmDisableZero") {
   field(DOPT, "Use CALC")
   field(OOPT, "When Zero")
   field(OUT, "$(S)$(ND)AlarmSummary.VAL PP")
+}
+
+record(ai, "$(S)$(ND)ADVLOOP:TARGET")
+{
+  field(DESC, "Advanced loop target")
+  field(DTYP, "asynFloat64")
+  field(INP, "@asyn(n$(NI)al,0)")
+  field(SCAN, "I/O Intr")
+}
+
+record(ao, "$(S)$(ND)ADVLOOP:TARGET:SP")
+{
+  field(DESC, "Advanced loop target")
+  field(DTYP, "asynFloat64")
+  field(OUT, "@asyn(n$(NI)alw,0)")
+  field(SCAN, "Passive")
 }
